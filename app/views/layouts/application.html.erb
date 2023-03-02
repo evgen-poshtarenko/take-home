@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TakeHome</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <nav class="navbar navbar-expand-sm bg-dark">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <%= current_user.name %>
+              </button>
+              <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuButton">
+                <%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-secondary btn-sm btn-block' %>
+              </div>
+            </div>
+          <% else %>
+            <%= render 'layouts/authorization', error_login: alert ? true : false %>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </head>
+
+  <body>
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= notice %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%= alert %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+  <%= yield %>
+  </body>
+</html>
