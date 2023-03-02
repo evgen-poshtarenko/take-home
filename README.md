@@ -1,24 +1,19 @@
-# README
+# Development environment setup with Docker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
+* make sure you have installed `docker` and `docker-compose`
+* it is better to add your *nix user to the `docker` group ([sudo] s not needed than)
 
-Things you may want to cover:
+### Copy the following:
+  * `cp .env/development/database.example .env/development/database`
+  * `cp .env/development/web.example .env/development/web`
 
-* Ruby version
+### Create database and run migrations:
+  * `docker-compose run web bundle exec rails db:create db:migrate`
 
-* System dependencies
+### Running application:
+  * `docker-compose up`
 
-* Configuration
+### Running tests:
+  * `docker-compose run web bundle exec rspec`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
