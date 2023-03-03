@@ -27,6 +27,7 @@ class Subscription < ApplicationRecord
 
   def valid_expiration_date?
     month, year = expiration_date.split('/')
+    return errors.add(:expiration_date, "problem with month") if month.to_i > 12 or month.to_i == 0
     if Date.new("20#{year}".to_i, month.to_i, 1) < Date.today
       errors.add(:expiration_date, "can't be in the past")
     end
