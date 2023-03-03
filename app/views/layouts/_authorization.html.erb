@@ -12,6 +12,8 @@
     });
 </script>
 
+<%= stylesheet_link_tag 'authorization' %>
+
 <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -23,11 +25,11 @@
       </div>
       <div class="tab-content">
         <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link" id='sign_up' data-toggle="tab" href="#sign-up">I'm a new customer</a>
+          <li class="nav-item sign-tab">
+            <a class="nav-link sign" id='sign_up' data-toggle="tab" href="#sign-up">I'm a new customer</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" id='sign_in' data-toggle="tab" href="#sign-in">I have an account</a>
+          <li class="nav-item sign-tab">
+            <a class="nav-link sign active" id='sign_in' data-toggle="tab" href="#sign-in">I have an account</a>
           </li>
         </ul>
 
@@ -52,7 +54,7 @@
                 </div>
               </div>
               <div class="modal-footer d-flex justify-content-center">
-                <%= f.submit "Create Your Account", class: 'btn btn-default' %>
+                <%= f.submit "Create Your Account", class: 'btn inp-submit' %>
               </div>
             <% end %>
           </div>
@@ -72,7 +74,7 @@
                 </div>
               </div>
               <div class="modal-footer d-flex justify-content-center">
-                <%= f.submit "Sign In", class: 'btn btn-default' %>
+                <%= f.submit "Sign In", class: 'btn inp-submit' %>
               </div>
             <% end %>
           </div>

@@ -1,0 +1,27 @@
+.sign {
+    color: black !important;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.sign.active {
+    color: green !important;
+    text-decoration: none;
+    border: none;
+    border-bottom: 4px solid green;
+    text-transform: uppercase;
+    border-color: green !important;
+}
+
+.inp-submit {
+    border: none;
+    background-color: green;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+
+.sign-tab {
+    width: 50%;
+    text-align: center;
+}

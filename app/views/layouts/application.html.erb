@@ -11,23 +11,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-    <nav class="navbar navbar-expand-sm bg-dark">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <% if user_signed_in? %>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <%= current_user.name %>
-              </button>
-              <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuButton">
-                <%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-secondary btn-sm btn-block' %>
-              </div>
+    <nav class="navbar navbar-light bg-light justify-content-between bg-dark">
+      <a href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house text-white" viewBox="0 0 16 16">
+          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+        </svg>
+      </a>
+      <div>
+        <% if user_signed_in? %>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" style="min-width: 157px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.name %>
+            </button>
+            <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuButton">
+              <%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-secondary btn-sm btn-block' %>
             </div>
-          <% else %>
-            <%= render 'layouts/authorization', error_login: alert ? true : false %>
-          <% end %>
-        </li>
-      </ul>
+          </div>
+        <% else %>
+          <%= render 'layouts/authorization', error_login: alert ? true : false %>
+        <% end %>
+      </div>
     </nav>
   </head>
 

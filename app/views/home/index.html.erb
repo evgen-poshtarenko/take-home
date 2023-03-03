@@ -1,109 +1,173 @@
-<script>
-    $( document ).ready(function() {
-        const monthInput = document.querySelector('#month');
-        const yearInput = document.querySelector('#year');
+<!DOCTYPE html>
+<html>
 
-        const focusSibling = function(target, direction, callback) {
-            const nextTarget = target[direction];
-            nextTarget && nextTarget.focus();
-            callback && callback(nextTarget);
-        }
+<head>
+  <%= stylesheet_link_tag 'mainpage' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-        monthInput.addEventListener('input', (event) => {
-            const value = event.target.value.toString();
-            if (value.length === 1 && value > 1) {
-                event.target.value = "0" + value;
-            }
-
-            if (value === "00") {
-                event.target.value = "01";
-            } else if (value > 12) {
-                event.target.value = "12";
-            }
-            2 <= event.target.value.length && focusSibling(event.target, "nextElementSibling");
-            event.stopImmediatePropagation();
-        });
-
-        yearInput.addEventListener('keydown', (event) => {
-            if (event.key === "Backspace" && event.target.selectionStart === 0) {
-                focusSibling(event.target, "previousElementSibling");
-                event.stopImmediatePropagation();
-            }
-        });
-
-        const inputMatchesPattern = function(e) {
-            const {
-                value,
-                selectionStart,
-                selectionEnd,
-                pattern
-            } = e.target;
-
-            const character = String.fromCharCode(e.which);
-            const proposedEntry = value.slice(0, selectionStart) + character + value.slice(selectionEnd);
-            const match = proposedEntry.match(pattern);
-
-            return e.metaKey || // cmd/ctrl
-              e.which <= 0 || // arrow keys
-              e.which == 8 || // delete key
-              match && match["0"] === match.input;
-        };
-
-        document.querySelectorAll('input[data-pattern-validate]').forEach(el => el.addEventListener('keypress', e => {
-            if (!inputMatchesPattern(e)) {
-                return e.preventDefault();
-            }
-        }));
-    });
-</script>
-
-<style>
-    .exp-wrapper {
-        position: relative;
-        border: 1px solid #aaa;
-        display: flex;
-        width: 300px;
-        justify-content: space-around;
-        height: 36px;
-        line-height: 36=px;
-        font-size: 24px;
-    }
-
-    .exp-wrapper:after {
-        content: '/';
-        position: absolute;
-        left: 50%;
-        color: #aaa;
-    }
-
-    input.exp {
-        float: left;
-        font-family: monospace;
-        border: 0;
-        width: 25px;
-        outline: none;
-        appearance: none;
-        font-size: 14px;
-    }
-    a.disabled {
-        pointer-events: none;
-        cursor: default;
-    }
-</style>
-
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">$ 14.99</h5>
-    <p class="card-text">Monthly subscription without obligation</p>
-    <% if subscription? %>
-      <%= link_to "Get all access", new_subscription_path, class: "btn btn-primary disabled"  %>
-    <% else %>
-      <%= link_to "Get all access", new_subscription_path, class: "btn btn-primary" %>
-    <% end %>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-12 top-banner">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpBdvdkieV5TKgxEtJ9--Uwc2okQLWFQx3GQ&usqp=CAU" alt="">
+    </div>
+  </div>
+  <div class="row banner">
+    <div class="col-lg-6 banner-left">
+      <div class="row">
+        <div class="col-4 banner-img">
+          <%= image_tag '3.png', alt: '' %>
+        </div>
+        <div class="col-8 banner-text">
+          <h3 class="banner-title">Top games</h3><br> <span class="banner-desc">4200+ games to play</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 banner-rigth">
+      See Top Games >
+    </div>
+  </div>
+  <div class="row list-games">
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-12">
+          <h3>
+            TOP GAMES
+          </h3>
+        </div>
+      </div>
+      <% 3.times do |_| %>
+        <div class="row game-info">
+          <div class="col-4 preview">
+            <%= image_tag '1.png', alt: '' %>
+          </div>
+          <div class="col-8">
+            <h5>Name game</h5>
+            <div class="tags">
+              <div class="tag">Tag #1</div>
+              <div class="tag">Tag #2</div>
+            </div>
+            <button class="detail"> PLAY </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-12">
+          <h3>
+            NEW GAMES
+          </h3>
+        </div>
+      </div>
+      <% 3.times do |_| %>
+        <div class="row game-info">
+          <div class="col-4 preview">
+            <%= image_tag '1.png', alt: '' %>
+          </div>
+          <div class="col-8">
+            <h5>Name game</h5>
+            <div class="tags">
+              <div class="tag">Tag #1</div>
+              <div class="tag">Tag #2</div>
+            </div>
+            <button class="detail"> PLAY </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-12">
+          <h3>
+            FREE GAMES
+          </h3>
+        </div>
+      </div>
+      <% 3.times do |_| %>
+        <div class="row game-info">
+          <div class="col-4 preview">
+            <%= image_tag '1.png', alt: '' %>
+          </div>
+          <div class="col-8">
+            <h5>Name game</h5>
+            <div class="tags">
+              <div class="tag">Tag #1</div>
+              <div class="tag">Tag #2</div>
+            </div>
+            <button class="detail"> PLAY </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row advantages">
+    <div class="col-lg-12 advantages-title">
+      <h2>The advantages for our all access members</h2>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-12 advantage-img">
+          <%= image_tag '2.png', alt: '' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 advantage-name">
+          <h3>Advantage #1</h3>
+        </div>
+      </div>
+      <div class="row advantage-desc">
+        <div class="col-12">
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-12 advantage-img">
+          <%= image_tag '2.png', alt: '' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 advantage-name">
+          <h3>Advantage #2</h3>
+        </div>
+      </div>
+      <div class="row advantage-desc">
+        <div class="col-12">
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-12 advantage-img">
+          <%= image_tag '2.png', alt: '' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 advantage-name">
+          <h3>Advantage #3</h3>
+        </div>
+      </div>
+      <div class="row advantage-desc">
+        <div class="col-12">
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row footer">
+    <div class="col-lg-12">
+      <% if subscription? %>
+        <%= link_to "Get all access", new_subscription_path, class: "btn disabled"  %>
+      <% else %>
+        <%= link_to "Get all access", new_subscription_path %>
+      <% end %>
+    </div>
   </div>
 </div>
 
-<div class="exp-wrapper">
-  <input autocomplete="off" class="exp" id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
-  <input autocomplete="off" class="exp" id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
-</div>
+</body>
+</html>
